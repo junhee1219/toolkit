@@ -112,31 +112,31 @@ const TextAreaSection = () => {
             {/* 상단 버튼 5개 */}
             <div className="top-button-bar">
                 <button
-                    className={`action-button ${buttonStates.btn1 ? 'active' : ''}`}
+                    className={`main-action-button ${buttonStates.btn1 ? 'active' : ''}`}
                     onClick={() => handleButtonClick('btn1')}
                 >
                     대문자 변경
                 </button>
                 <button
-                    className={`action-button ${buttonStates.btn2 ? 'active' : ''}`}
+                    className={`main-action-button ${buttonStates.btn2 ? 'active' : ''}`}
                     onClick={() => handleButtonClick('btn2')}
                 >
                     소문자 변경
                 </button>
                 <button
-                    className={`action-button ${buttonStates.btn3 ? 'active' : ''}`}
+                    className={`main-action-button ${buttonStates.btn3 ? 'active' : ''}`}
                     onClick={() => handleButtonClick('btn3')}
                 >
                     줄바꿈 → 띄어쓰기
                 </button>
                 <button
-                    className={`action-button ${buttonStates.btn5 ? 'active' : ''}`}
+                    className={`main-action-button ${buttonStates.btn5 ? 'active' : ''}`}
                     onClick={() => handleButtonClick('btn5')}
                 >
                     리스트 문자열
                 </button>
                 <button
-                    className="action-button"
+                    className="main-action-button copy-button"
                     onClick={handleCopy}
                 >
                     복사
@@ -203,13 +203,9 @@ const TextAreaSection = () => {
                     <div className="counter">문자 수: {counter2}</div>
                 </div>
             </div>
-
-            {/* 하단 기능 버튼들 (필요 시 추가) */}
-            <div className="bottom-button-bar">
-                {/* 추가적인 기능 버튼이 필요하다면 여기에 추가하세요 */}
-            </div>
         </section>
     );
+
 };
 
 export default TextAreaSection;

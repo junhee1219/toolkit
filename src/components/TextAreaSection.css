@@ -1,0 +1,193 @@
+/* TextAreaSection.css */
+
+/* 전체 컨테이너 */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 10px 0px 10px;
+    box-sizing: border-box;
+    background-color: #121212; /* 다크 배경 */
+    font-family: 'Pretendard', sans-serif;
+    color: #ffffff;
+    width: 100%; /* 부모 컨테이너의 전체 너비를 차지 */
+}
+
+/* 상단 버튼 바 */
+.top-button-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px; /* 버튼 간격 조정 */
+}
+
+/* 메인 섹션의 버튼 스타일링 */
+.main-action-button {
+    padding: 10px 20px;
+    background-color: #2c2c2c;
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 텍스트 수평 중앙 정렬 */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+.main-action-button:hover {
+    background-color: #3f51b5;
+    color: #ffffff;
+}
+
+.main-action-button.active {
+    background-color: #303f9f;
+    color: #ffffff;
+}
+
+.copy-button {
+    /* 복사 버튼에 대한 추가 스타일링이 필요하다면 여기에 작성 */
+}
+
+/* 메인 콘텐츠 섹션 */
+.content-section {
+    display: flex;
+    flex: 1;
+    gap: 25px;
+    overflow: hidden;
+    flex-direction: row; /* 가로 방향으로 설정 */
+    width: 100%; /* 전체 너비 차지 */
+}
+
+.replace-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-width: 500px; /* 필요에 따라 조정 */
+    width: 100%;
+}
+
+/* 첫 번째 텍스트 영역 */
+.textarea1-section,
+.textarea2-section {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* 불필요한 스크롤 방지 */
+    width: 100%;
+}
+
+.replace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.replace-header label {
+    font-weight: 500;
+    font-size: 1.1em;
+    color: #ffffff;
+}
+
+.add-pair-button {
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+}
+
+.add-pair-button:hover {
+    background-color: #43a047;
+}
+
+.replace-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.replace-pair {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 인풋과 버튼 사이 간격 조정 */
+    flex-wrap: nowrap; /* 요소들이 한 줄에 있도록 설정 */
+}
+
+/* 인풋 필드 스타일 */
+.find-word-input,
+.replace-word-input {
+    flex: 1 1 auto;
+    padding: 8px;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    min-width: 0; /* 플렉스 아이템의 최소 너비를 0으로 설정하여 축소 가능하게 함 */
+}
+
+/* 제거 버튼 스타일 */
+.remove-pair-button {
+    padding: 8px 12px;
+    background-color: #f44336;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 0 0 auto; /* 버튼의 크기를 고정 */
+}
+
+.remove-pair-button:hover {
+    background-color: #d32f2f;
+}
+
+.input-textarea {
+    flex: 1;
+    padding: 10px;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    resize: none;
+    height: 100%;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.counter {
+    margin-top: 5px;
+    text-align: right;
+    font-size: 0.9em;
+    color: #bbbbbb;
+}
+
+.output-textarea {
+    flex: 1;
+    padding: 10px;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #555555;
+    border-radius: 4px;
+    resize: none;
+    height: 100%;
+    font-size: 1em;
+    box-sizing: border-box;
+}

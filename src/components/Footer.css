@@ -1,0 +1,97 @@
+/* Footer.css */
+
+/* Footer 전체 스타일 */
+.footer {
+    background-color: #1f1f1f;
+    padding: 20px 20px;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
+    margin: 10px auto 30px; /* 상단 마진 40px, 좌우 마진 auto, 하단 마진 0 */
+    border-radius: 8px 8px 8px 8px; /* 상단 모서리 둥글게 */
+    max-width: 1500px;
+    box-sizing: border-box; /* 패딩과 보더를 포함한 전체 크기 계산 */
+    color: #ffffff;
+}
+
+/* Footer 콘텐츠 레이아웃 */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Footer 텍스트 스타일 */
+.footer-content p {
+    margin: 0;
+    font-size: 1rem;
+    text-align: center;
+    color: #bbbbbb;
+    transition: color 0.3s;
+}
+
+/* Footer 링크 스타일 */
+.footer-content a {
+    color: #007aff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.footer-content a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* 소셜 아이콘 스타일 (선택 사항) */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    color: #ffffff;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #007aff;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .footer {
+        padding: 15px 20px;
+    }
+
+    .footer-content p {
+        font-size: 0.85rem;
+    }
+
+    .social-icons {
+        gap: 10px;
+    }
+
+    .social-icons a {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 10px 15px;
+    }
+
+    .footer-content p {
+        font-size: 0.8rem;
+    }
+
+    .social-icons {
+        gap: 8px;
+    }
+
+    .social-icons a {
+        font-size: 0.9rem;
+    }
+}

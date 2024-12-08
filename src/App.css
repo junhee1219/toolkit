@@ -1,0 +1,56 @@
+/* App.css */
+
+*{
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* 다크 배경 */
+  color: #ffffff; /* 기본 텍스트 색상 */
+}
+
+/* 링크 스타일 초기화 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* textarea 배경색 및 텍스트 색상 */
+textarea {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
+}
+
+/* 입력 필드 배경색 및 텍스트 색상 */
+input {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1px solid #333333;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
+  padding: 0 15px; /* 좌우 패딩 추가 */
+  box-sizing: border-box;
+  background-color: #121212; /* 다크 배경 */
+  min-height: 100vh;
+}
+
+.App main {
+  flex: 1; /* 가용 공간을 모두 차지 */
+  width: 100%; /* 전체 너비 차지 */
+}
+
+/* 구분선 스타일 */
+.header-separator {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, #3f51b5, #ff4081);
+  margin-top: 15px;
+  border-radius: 2px;
+}
