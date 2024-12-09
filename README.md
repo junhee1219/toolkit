@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Your Insight React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 소개
 
-## Available Scripts
+**Your Insight React**는 React로 개발된 웹 애플리케이션으로, 사용자에게 다양한 업무 도구를 제공합니다.
 
-In the project directory, you can run:
+## 시작하기
+이 가이드는 로컬 환경에서 프로젝트를 클론하고 실행하는 방법을 설명합니다.
 
-### `npm start`
+### 사전 요구사항
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Node.js** (npm 포함) 설치 필요
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  - [Node.js 공식 사이트](https://nodejs.org/)에서 운영체제에 맞는 설치 파일을 다운로드하여 설치하세요.
+  - 설치 후, 터미널 또는 명령 프롬프트에서 다음 명령어로 설치를 확인할 수 있습니다:
 
-### `npm test`
+    ```bash
+    node -v
+    npm -v
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - **npm이 설치되어 있지 않은 경우:**
+    - Node.js를 설치하면 자동으로 npm도 함께 설치됩니다.
+    - 설치 후, 위의 명령어로 설치 여부를 확인하세요.
 
-### `npm run build`
+### 설치 단계
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **저장소 클론하기**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   터미널 또는 명령 프롬프트를 열고, 원하는 디렉토리로 이동한 후 다음 명령어를 실행하여 저장소를 클론합니다:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   git clone https://github.com/junhee1219/your-insight-react.git
+   cd your-insight-react/
+   ```
 
-### `npm run eject`
+2. **의존성 설치하기**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   프로젝트 디렉토리로 이동한 후, 다음 명령어를 실행하여 필요한 패키지를 설치합니다:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```bash
+    npm install
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **애플리케이션 실행하기**
+    모든 의존성이 설치되면, 다음 명령어를 실행하여 개발 서버를 시작할 수 있습니다:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    ```bash
+    npm start
+    ```
+    실행 후, 브라우저에서 http://localhost:3000 주소로 접속하면 애플리케이션을 확인할 수 있습니다.
