@@ -2,8 +2,9 @@ import React from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import TextAreaSection from './components/TextAreaSection';
+import PPTExtractor from './components/PPTExtractor';
 import Footer from './components/Footer';
-import PPTExtractor from './pages/PPTExtractor';
+
 
 // 미구현
 
