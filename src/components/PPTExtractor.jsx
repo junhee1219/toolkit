@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import JSZip from 'jszip';
 import { FaFileAlt } from 'react-icons/fa'; // react-icons에서 파일 아이콘 가져오기
 import './PPTExtractor.css';
+import FileDropZone from './FileDropZone'; // 공통 컴포넌트
 
 const PPTExtractor = () => {
     const pptFileType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
@@ -259,37 +260,12 @@ const PPTExtractor = () => {
             <section className="upload-section">
                 <h2>PPT 파일 업로드</h2>
                 <form id="ppt-upload-form" onSubmit={handleSubmit} encType="multipart/form-data">
-                    <div
-                        id="drop-zone"
-                        onDrop={handleDrop}
-                        onDragOver={handleDragOver}
-                        className={`drop-zone ${isDropped ? 'dropped' : ''}`}
-                        onClick={() => document.getElementById('ppt-file').click()}
-                    >
-                        {!isDropped && (
-                            <p id="file-description">
-                                파일을 여기에 드래그 앤 드롭하거나 클릭하여 파일을 선택하세요.
-                            </p>
-                        )}
-                        <input
-                            type="file"
-                            id="ppt-file"
-                            name="ppt-file"
-                            accept=".pptx"
-                            style={{ display: 'none' }}
-                            onChange={handleFileChange}
-                        />
-                        {selectedFile && (
-                            <div id="file-info">
-                                <FaFileAlt className="file-icon" />
-                                <p>
-                                    <span id="file-name">파일명: {fileInfo.name}</span>
-                                    <br /><br />
-                                    <span id="file-size">파일 크기: {fileInfo.size}</span>
-                                </p>
-                            </div>
-                        )}
-                    </div>
+                    <FileDropZone
+                        instructions="여기에 PPT 파일을 드래그하거나 클릭하여 업로드하세요"
+                        accept=".pptx"
+                        multiple={false}
+                        onFilesChange={handleFileChange}
+                    />
                     <div className="button-container">
                         <button type="submit" className="action-button" disabled={isUploading || !selectedFile}>
                             {isUploading ? '파일 읽는 중...' : '파일 읽기'}

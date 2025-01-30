@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import TextAreaSection from './components/TextAreaSection';
@@ -16,7 +16,33 @@ import Footer from './components/Footer';
 import './App.css';
 
 function App() {
-  return (
+
+    // -----------------------------
+    //  8. 제목에 시간 표시 (선택)
+    // -----------------------------
+    useEffect(() => {
+        const updateTime = () => {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const period = hours >= 12 ? '오후' : '오전';
+            hours = hours % 12;
+            hours = hours || 12;
+            const formattedHours = String(hours).padStart(2, '0');
+            const formattedMinutes = String(minutes).padStart(2, '0');
+            const formattedSeconds = String(seconds).padStart(2, '0');
+
+            document.title = `${period} ${formattedHours}시 ${formattedMinutes}분 ${formattedSeconds}초`;
+        };
+        updateTime();
+        const timer = setInterval(updateTime, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    return (
       <Router>
         <div className="App">
           <Header />
