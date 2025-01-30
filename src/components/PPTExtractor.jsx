@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import JSZip from 'jszip';
-import { XMLParser } from 'fast-xml-parser';
 import { FaFileAlt } from 'react-icons/fa'; // react-icons에서 파일 아이콘 가져오기
 import './PPTExtractor.css';
 
 const PPTExtractor = () => {
+    const pptFileType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileInfo, setFileInfo] = useState({ name: '', size: '', pageCount: 0 });
     const [isUploading, setIsUploading] = useState(false);
@@ -15,14 +15,14 @@ const PPTExtractor = () => {
     const [extractSettings, setExtractSettings] = useState({
         slideNumbersToKeep: '',
         extractionWords: '',
-        caseSensitive: false,
+        capitalYn: false,
     });
     const [isDropped, setIsDropped] = useState(false); // 드래그 앤 드롭 텍스트 표시 여부
 
     // 파일 선택 핸들러
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file && file.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
+        if (file && file.type === pptFileType) {
             setSelectedFile(file);
             setFileInfo({
                 name: file.name,
@@ -39,7 +39,7 @@ const PPTExtractor = () => {
     const handleDrop = (e) => {
         e.preventDefault();
         const file = e.dataTransfer.files[0];
-        if (file && file.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation') {
+        if (file && file.type === pptFileType) {
             setSelectedFile(file);
             setFileInfo({
                 name: file.name,
@@ -72,7 +72,8 @@ const PPTExtractor = () => {
             const zipContent = await zip.loadAsync(fileData);
 
             // 슬라이드 XML 파일 추출
-            const slideFiles = Object.keys(zipContent.files).filter(fileName => fileName.startsWith('ppt/slides/slide') && fileName.endsWith('.xml'));
+            const slideFiles = Object.keys(zipContent.files)
+                .filter(fileName => fileName.startsWith('ppt/slides/slide') && fileName.endsWith('.xml'));
             const pageCount = slideFiles.length;
             setFileInfo(prev => ({ ...prev, pageCount }));
 
@@ -88,6 +89,8 @@ const PPTExtractor = () => {
     // 설정 변경 핸들러
     const handleSettingChange = (e) => {
         const { name, value, type, checked } = e.target;
+        console.log(name, value, type, checked);
+        console.log(setExtractSettings);
         setExtractSettings(prev => ({
             ...prev,
             [name]: type === 'checkbox' ? checked : value,
@@ -109,59 +112,81 @@ const PPTExtractor = () => {
             const zipContent = await zip.loadAsync(fileData);
 
             // 슬라이드 XML 파일 추출
-            const slideFiles = Object.keys(zipContent.files).filter(fileName => fileName.startsWith('ppt/slides/slide') && fileName.endsWith('.xml'));
+            const slideFiles = Object.keys(zipContent.files)
+                .filter(fileName => fileName.startsWith('ppt/slides/slide') && fileName.endsWith('.xml'));
 
             // 유지할 슬라이드 번호 목록
-            const slidesToKeep = extractSettings.slideNumbersToKeep
-                .split(',')
-                .map(num => parseInt(num.trim()))
-                .filter(num => !isNaN(num));
+            const slidesToKeep = new Set();
+            const slideNumList = extractSettings.slideNumbersToKeep.split(',')
+            const pageCount = slideFiles.length;
 
-            const extractionWords = extractSettings.extractionWords.split(',').map(word => word.trim()).filter(word => word !== '');
+            for(let i = 0; i < slideNumList.length ; i++){
+                if (!slideNumList[i] || slideNumList[i].trim() === ''){
+                    continue;
+                }
+                let slideNo = parseInt(slideNumList[i].trim());
+                if (isNaN(slideNo) || slideNo > pageCount || slideNo < 1) {
+                    alert(`전체 슬라이드 수는 ${pageCount}입니다. 유지할 슬라이드를 다시 설정해주세요.`);
+                    return;
+                }
+                slidesToKeep.add(slideNo);
+            }
 
-            const processedSlides = [];
-            const parser = new XMLParser({ ignoreAttributes: false });
+            const extractionWords = extractSettings.extractionWords.trim();
 
             for (let i = 0; i < slideFiles.length; i++) {
                 const slideFile = slideFiles[i];
-                const slideContent = await zipContent.files[slideFile].async('string');
-                let parsedSlide = parser.parse(slideContent);
+                let match = slideFile.match(/ppt\/slides\/slide(\d+)\.xml/);
+                if (!match) continue;
+                let slideNumber = parseInt(match[1]);
 
-                // 슬라이드 번호가 유지 목록에 있는지 확인
-                if (!slidesToKeep.includes(i + 1)) {
-                    // 슬라이드 텍스트 추출
-                    const slideText = extractTextFromSlide(parsedSlide);
+                let slideContent = await zipContent.file(slideFile).async("text");
 
-                    // 추출 단어 매칭
-                    let hasExtractionWord = false;
-                    if (extractSettings.caseSensitive) {
-                        hasExtractionWord = extractionWords.some(word => slideText.includes(word));
-                    } else {
-                        const lowerSlideText = slideText.toLowerCase();
-                        hasExtractionWord = extractionWords.some(word => lowerSlideText.includes(word.toLowerCase()));
+                if (slidesToKeep.has(slideNumber)) {
+                    continue;
+                }
+                let containsKeyword = false;
+                if (extractionWords) {
+                    let searchKeyword = extractionWords;
+                    let contentToSearch = slideContent;
+                    if (!extractSettings.capitalYn) {
+                        searchKeyword = searchKeyword.toLowerCase();
+                        contentToSearch = contentToSearch.toLowerCase();
                     }
-
-                    if (hasExtractionWord) {
-                        processedSlides.push(slideContent);
+                    if (contentToSearch.includes(searchKeyword)) {
+                        containsKeyword = true;
                     }
-                } else {
-                    // 유지할 슬라이드인 경우
-                    processedSlides.push(slideContent);
+                }
+
+                if (containsKeyword) {
+                    slidesToKeep.add(slideNumber);
+                }
+            
+            }
+            let slidesDeleted = 0;
+            for(let slideFile of slideFiles) {
+                let match = slideFile.match(/ppt\/slides\/slide(\d+)\.xml/);
+                if (!match) continue;
+                let slideNumber = parseInt(match[1]);
+
+                if (!slidesToKeep.has(slideNumber)) {
+                    // Delete the slide file
+                    zipContent.remove(slideFile);
+                    slidesDeleted++;
+
+                    // Remove the slide's relationships
+                    let relsFileName = `ppt/slides/_rels/slide${slideNumber}.xml.rels`;
+                    if (zipContent.file(relsFileName)) {
+                        zipContent.remove(relsFileName);
+                    }
                 }
             }
-
-            // 새로운 ZIP 파일 생성
-            const newZip = new JSZip();
-
-            // 슬라이드 파일만 복사
-            processedSlides.forEach((slideContent, index) => {
-                const slidePath = `ppt/slides/slide${index + 1}.xml`;
-                newZip.file(slidePath, slideContent);
-            });
-
+            // Update 'ppt/presentation.xml' and 'ppt/_rels/presentation.xml.rels'
+            await updatePresentationRelationships(zipContent, slidesToKeep);
             // 다운로드용 Blob 생성
-            const blob = await newZip.generateAsync({ type: 'blob' });
+            const blob = await zipContent.generateAsync({ type: 'blob' });
             const url = URL.createObjectURL(blob);
+            alert(`슬라이드 삭제가 완료되었습니다. 총 ${slidesDeleted}개의 슬라이드가 삭제되었습니다.`);
             setDownloadLink(url);
         } catch (error) {
             console.error('PPT 추출 중 오류 발생:', error);
@@ -171,31 +196,62 @@ const PPTExtractor = () => {
         }
     };
 
-    // 슬라이드에서 텍스트 추출하는 함수 (간단한 예시)
-    const extractTextFromSlide = (slide) => {
-        let text = '';
-        // XML 구조에 따라 텍스트 추출 로직 작성
-        // 예시: slide['p:sld']['p:cSld']['p:spTree']['p:sp']에서 텍스트 추출
-        if (slide['p:sld'] && slide['p:sld']['p:cSld'] && slide['p:sld']['p:cSld']['p:spTree'] && slide['p:sld']['p:cSld']['p:spTree']['p:sp']) {
-            const shapes = slide['p:sld']['p:cSld']['p:spTree']['p:sp'];
-            shapes.forEach(shape => {
-                if (shape['p:txBody'] && shape['p:txBody']['a:p']) {
-                    const paragraphs = shape['p:txBody']['a:p'];
-                    paragraphs.forEach(paragraph => {
-                        if (paragraph['a:r']) {
-                            const runs = Array.isArray(paragraph['a:r']) ? paragraph['a:r'] : [paragraph['a:r']];
-                            runs.forEach(run => {
-                                if (run['a:t']) {
-                                    text += run['a:t'] + ' ';
-                                }
-                            });
-                        }
-                    });
+    const updatePresentationRelationships = async (pptxZip, slidesToKeep) => {
+        // Read 'ppt/presentation.xml'
+        let presentationXmlContent = await pptxZip.file("ppt/presentation.xml").async("text");
+
+        // Parse the XML content
+        let parser = new DOMParser();
+        let presentationXmlDoc = parser.parseFromString(presentationXmlContent, "application/xml");
+
+        // Read 'ppt/_rels/presentation.xml.rels'
+        let presRelsXmlContent = await pptxZip.file("ppt/_rels/presentation.xml.rels").async("text");
+        let presRelsXmlDoc = parser.parseFromString(presRelsXmlContent, "application/xml");
+
+        // Build a map from rId to slide number
+        let relationshipElems = presRelsXmlDoc.getElementsByTagName("Relationship");
+        let rIdToSlideNo = {};
+        for (let i = 0; i < relationshipElems.length; i++) {
+            let relElem = relationshipElems[i];
+            let rId = relElem.getAttribute("Id");
+            let target = relElem.getAttribute("Target");
+            if (target.startsWith("slides/slide")) {
+                let match = target.match(/slides\/slide(\d+)\.xml/);
+                if (match) {
+                    rIdToSlideNo[rId] = parseInt(match[1]);
                 }
-            });
+            }
         }
-        return text;
-    };
+
+        let sldIdElems = presentationXmlDoc.getElementsByTagName("p:sldId");
+        for (let i = sldIdElems.length - 1; i >= 0; i--) {
+            let sldIdElem = sldIdElems[i];
+            let rId = sldIdElem.getAttribute("r:id");
+            let slideNo = rIdToSlideNo[rId];
+
+            if (!slidesToKeep.has(slideNo)) {
+                // Remove this sldId element
+                sldIdElem.parentNode.removeChild(sldIdElem);
+
+                // Remove the relationship from presentation.xml.rels
+                for (let j = relationshipElems.length - 1; j >= 0; j--) {
+                    let relElem = relationshipElems[j];
+                    if (relElem.getAttribute("Id") === rId) {
+                        relElem.parentNode.removeChild(relElem);
+                    }
+                }
+            }
+        }
+
+        // Serialize the updated XML and update the files in pptxZip
+        let serializer = new XMLSerializer();
+        let updatedPresentationXmlContent = serializer.serializeToString(presentationXmlDoc);
+        pptxZip.file("ppt/presentation.xml", updatedPresentationXmlContent);
+
+        let updatedPresRelsXmlContent = serializer.serializeToString(presRelsXmlDoc);
+        pptxZip.file("ppt/_rels/presentation.xml.rels", updatedPresRelsXmlContent);
+    }
+
 
     return (
         <main className="ppt-extractor-container">
@@ -222,7 +278,6 @@ const PPTExtractor = () => {
                             accept=".pptx"
                             style={{ display: 'none' }}
                             onChange={handleFileChange}
-                            required
                         />
                         {selectedFile && (
                             <div id="file-info">
@@ -285,9 +340,9 @@ const PPTExtractor = () => {
                             <label htmlFor="caseSensitive">대소문자 구분:</label>
                             <input
                                 type="checkbox"
-                                id="caseSensitive"
-                                name="caseSensitive"
-                                checked={extractSettings.caseSensitive}
+                                id="capitalYn"
+                                name="capitalYn"
+                                checked={extractSettings.capitalYn}
                                 onChange={handleSettingChange}
                             />
                         </div>
@@ -319,7 +374,7 @@ const PPTExtractor = () => {
                         id="download-link"
                         href={downloadLink}
                         className="action-button download-button"
-                        download="processed_presentation.pptx"
+                        download={fileInfo.name.split(".")[0]+"_"+extractSettings.extractionWords.trim()+".pptx"}
                     >
                         다운로드
                     </a>
