@@ -5,7 +5,7 @@ import './Header.css';
 const Header = () => {
     return (
         <header>
-            <nav className="button-container">
+            <nav className="nav-button-container">
                 <NavLink
                     to="/"
                     className={({ isActive }) =>

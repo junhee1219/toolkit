@@ -1,14 +1,5 @@
 /* src/components/PPTExtractor.css */
 
-.ppt-extractor-container {
-    max-width: 800px;
-    margin: 40px auto; /* 상하 마진을 늘려 푸터와의 간격 확보 */
-    padding: 20px;
-    font-family: 'Noto Sans KR', sans-serif;
-    border-radius: 10px;
-    color: #e0e0e0; /* 밝은 텍스트 색상 */
-}
-
 /* 배지 스타일 */
 .badge {
     background-color: #ffc107;

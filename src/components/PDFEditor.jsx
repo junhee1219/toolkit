@@ -126,7 +126,7 @@ function PDFEditor() {
     };
 
     return (
-        <main className="pdf-editor-container">
+        <section className="main-container">
             <section className="upload-section">
                 <h2>PDF 파일 업로드</h2>
 
@@ -182,7 +182,7 @@ function PDFEditor() {
                     </div>
                 </section>
             )}
-        </main>
+        </section>
     );
 }
 

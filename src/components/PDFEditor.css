@@ -1,26 +1,4 @@
 /* 최상위 컨테이너 */
-.pdf-editor-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* 업로드 섹션 */
-.upload-section {
-    background-color: #1f1f1f;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.upload-section h2 {
-    margin: 0 0 15px;
-    color: #ffffff;
-}
 
 /* 폼 */
 #pdf-upload-form {

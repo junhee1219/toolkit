@@ -255,8 +255,7 @@ const PPTExtractor = () => {
 
 
     return (
-        <main className="ppt-extractor-container">
-            {/* 파일 업로드 섹션 */}
+        <section className="main-container">
             <section className="upload-section">
                 <h2>PPT 파일 업로드</h2>
                 <form id="ppt-upload-form" onSubmit={handleSubmit} encType="multipart/form-data">
@@ -356,7 +355,7 @@ const PPTExtractor = () => {
                     </a>
                 </section>
             )}
-        </main>
+        </section>
     );
 
 };

@@ -4,16 +4,14 @@ import Header from './components/Header';
 import TextAreaSection from './components/TextAreaSection';
 import PPTExtractor from './components/PPTExtractor';
 import PDFEditor from './components/PDFEditor';
+import PDFToJPG from './components/PDFToJPG';
 import Footer from './components/Footer';
+import './App.css';
 
 
 // 미구현
 
-
-// import PDFToJPG from './pages/PDFToJPG';
 // import FolderListToExcel from './pages/FolderListToExcel';
-
-import './App.css';
 
 function App() {
 
@@ -52,8 +50,8 @@ function App() {
               <Route path="/" element={<TextAreaSection />} />
               <Route path="/ppt_extractor" element={<PPTExtractor />} />
                <Route path="/pdf_editor" element={<PDFEditor />} />
-                {/*<Route path="/pdf_to_jpg" element={<PDFToJPG />} />
-              <Route path="/folder_list_to_excel" element={<FolderListToExcel />} /> */}
+                <Route path="/pdf_to_jpg" element={<PDFToJPG />} />
+                {/*<Route path="/folder_list_to_excel" element={<FolderListToExcel />} /> */}
             </Routes>
           </main>
           <div className="header-separator"></div>
