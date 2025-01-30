@@ -1,0 +1,146 @@
+/* PDFEditor 컴포넌트 최상위 컨테이너 */
+.pdf-editor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 중앙 정렬 */
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #121212; /* App 전체와 톤 맞추기 (다크 배경) */
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+/* 제목 스타일 */
+.pdf-editor-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+/* 드래그 앤 드롭 영역 */
+.pdf-editor-droparea {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px; /* 적당히 좁게 제한 */
+    padding: 20px;
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 20px;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+/* 드래그 상태를 표현해주려면 이런 클래스 추가 후 onDragOver에서 적용 가능 */
+.pdf-editor-droparea.dragover {
+    border: 2px dashed #007bff;
+    background-color: #1e1e1e;
+}
+
+/* 공용 버튼 스타일 */
+.pdf-editor-button {
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.pdf-editor-button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+.pdf-editor-button:active {
+    transform: scale(0.95);
+}
+
+/* 초기화 버튼에만 다른 색을 주고 싶다면 */
+.pdf-editor-button.reset {
+    background-color: #555;
+}
+
+/* 썸네일 컨테이너 */
+.pdf-editor-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 1600px;
+}
+
+/* 썸네일 */
+.pdf-editor-thumbnail {
+    border: 3px solid #000; /* 기본적으로는 검정, JS에서 color로 변경 */
+    border-radius: 5px;
+    padding: 5px;
+    cursor: move;
+    width: 150px;
+    text-align: center;
+    position: relative;
+    background-color: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 썸네일 번호 라벨 */
+.pdf-editor-number-label {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* 클릭 방지 */
+}
+
+/* 썸네일 삭제 버튼 */
+.pdf-editor-delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    padding: 0;
+}
+
+/* 썸네일 이미지 */
+.pdf-editor-thumbnail img {
+    max-width: 100%;
+    height: auto;
+    flex-grow: 1;
+}
+
+/* 썸네일에 표시되는 파일명+페이지 */
+.pdf-editor-thumbnail-text {
+    margin: 5px 0 0;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
