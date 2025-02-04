@@ -6,12 +6,11 @@ import './PDFToJPG.css';
 
 // pdf.js 워커 설정 (버전 맞춰서 가져오기)
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.worker.min.js';
+    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.7.107/pdf.worker.min.js';
 
 function PDFToJPG() {
     const [pdfFile, setPdfFile] = useState(null);
     const [originalFileName, setOriginalFileName] = useState('converted');
-    const [fileInfo, setFileInfo] = useState(''); // 상태 메시지
     const [downloadURL, setDownloadURL] = useState('');
     const [isConverting, setIsConverting] = useState(false);
 
@@ -30,7 +29,6 @@ function PDFToJPG() {
         setPdfFile(file);
         const baseName = file.name.replace(/\.pdf$/i, '');
         setOriginalFileName(baseName || 'converted');
-        setFileInfo(`선택된 파일: ${file.name}`);
         setDownloadURL('');
     };
 
@@ -38,7 +36,6 @@ function PDFToJPG() {
     const handleConvert = async () => {
         if (!pdfFile) return;
         setIsConverting(true);
-        setFileInfo('파일을 변환 중입니다...');
         setDownloadURL('');
 
         try {
@@ -77,23 +74,14 @@ function PDFToJPG() {
             const zipURL = URL.createObjectURL(zipBlob);
             setDownloadURL(zipURL);
 
-            setFileInfo(`변환 완료: 총 ${totalPages} 페이지`);
         } catch (error) {
             console.error('PDF 변환 중 오류:', error);
             alert('PDF를 변환하는 중 오류가 발생했습니다.');
-            setFileInfo('파일 변환에 실패했습니다.');
         } finally {
             setIsConverting(false);
         }
     };
 
-    // 리셋
-    const handleReset = () => {
-        setPdfFile(null);
-        setOriginalFileName('converted');
-        setFileInfo('');
-        setDownloadURL('');
-    };
 
     // dataURL -> Blob 변환 함수
     function dataURLtoBlob(dataurl) {
@@ -109,52 +97,28 @@ function PDFToJPG() {
     }
 
     return (
-        <div className="pdf-to-jpg-container">
-            <h1>PDF를 JPG로 변환</h1>
-            <main>
-                <div className="content">
-                    {/* 공통 FileDropZone: multiple={false}, PDF만 */}
-                    <FileDropZone
-                        instructions="여기에 PDF 파일을 드래그하거나 클릭하여 업로드하세요"
-                        accept="application/pdf"
-                        multiple={false}
-                        onFilesChange={handleFileDrop}
-                    />
-
-                    {/* 파일 정보 표시 */}
-                    <div className="file-info">{fileInfo}</div>
-
-                    {/* 변환 / 리셋 버튼 */}
-                    <div className="button-container">
-                        <button
-                            className="action-button convert-button"
-                            onClick={handleConvert}
-                            disabled={!pdfFile || isConverting}
-                        >
-                            {isConverting ? '변환 중...' : '변환하기'}
-                        </button>
-                        <button
-                            className="action-button reset-button"
-                            onClick={handleReset}
-                            disabled={!pdfFile || isConverting}
-                        >
-                            리셋
-                        </button>
-                    </div>
-
-                    {/* 다운로드 링크 */}
-                    {downloadURL && (
-                        <a
-                            href={downloadURL}
-                            download={`${originalFileName}_JPG.zip`}
-                            className="download-link"
-                        >
-                            {`${originalFileName}_JPG.zip 다운로드`}
-                        </a>
-                    )}
-                </div>
-            </main>
-        </div>
+        <section className="main-container">
+            <FileDropZone
+                title="PDF를 JPG로 변환"
+                instructions="여기에 PDF 파일을 드래그하거나 클릭하여 업로드하세요"
+                accept="application/pdf"
+                multiple={false}
+                onFilesChange={handleFileDrop}
+                buttonLabel={isConverting ? '변환 중...' : '변환하기'}
+                onButtonClick={handleConvert}
+                buttonDisabled={isConverting}
+            />
+            {/* 다운로드 링크 */}
+            {downloadURL && (
+                <a
+                    href={downloadURL}
+                    download={`${originalFileName}_JPG.zip`}
+                    className="download-link"
+                >
+                    {`${originalFileName}_JPG.zip 다운로드`}
+                </a>
+            )}
+        </section>
     );
 }
 
