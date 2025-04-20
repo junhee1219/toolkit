@@ -6,7 +6,6 @@ import './PPTExtractor.css';
 import FileDropZone from './FileDropZone'; // 공통 컴포넌트
 
 const PPTExtractor = () => {
-  const pptFileType = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileInfo, setFileInfo] = useState({name: '', size: '', pageCount: 0});
   const [isUploading, setIsUploading] = useState(false);
@@ -212,11 +211,6 @@ const PPTExtractor = () => {
     let updatedPresRelsXmlContent = serializer.serializeToString(presRelsXmlDoc);
     pptxZip.file("ppt/_rels/presentation.xml.rels", updatedPresRelsXmlContent);
   }
-
-  function handleFileChange() {
-
-  }
-
 
   return (
     <section className="main-container">
