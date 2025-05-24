@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import JSZip from 'jszip';
+import { FaFileAlt } from 'react-icons/fa'; // react-icons에서 파일 아이콘 가져오기
 import './PPTExtractor.css';
 import FileDropZone from './FileDropZone'; // 공통 컴포넌트
 
@@ -17,10 +18,11 @@ const PPTExtractor = () => {
         extractionWords: '',
         capitalYn: false,
     });
+    const [isDropped, setIsDropped] = useState(false); // 드래그 앤 드롭 텍스트 표시 여부
 
     // 파일 선택 핸들러
-    const handleFileChange = (files) => {
-        const file = files[0];
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
         if (file && file.type === pptFileType) {
             setSelectedFile(file);
             setFileInfo({
@@ -28,14 +30,36 @@ const PPTExtractor = () => {
                 size: `${(file.size / 1024).toFixed(2)} KB`,
                 pageCount: 0, // 초기 페이지 수
             });
+            setIsDropped(true); // 드롭 텍스트 숨기기
         } else {
             alert('PPTX 파일만 업로드 가능합니다.');
         }
     };
 
+    // 드래그 앤 드롭 핸들러
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        if (file && file.type === pptFileType) {
+            setSelectedFile(file);
+            setFileInfo({
+                name: file.name,
+                size: `${(file.size / 1024).toFixed(2)} KB`,
+                pageCount: 0,
+            });
+            setIsDropped(true);
+        } else {
+            alert('PPTX 파일만 업로드 가능합니다.');
+        }
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
 
     // 파일 업로드 제출 핸들러
     const handleSubmit = async (e) => {
+        e.preventDefault();
         if (!selectedFile) {
             alert('파일을 선택해주세요.');
             return;
@@ -232,16 +256,22 @@ const PPTExtractor = () => {
 
     return (
         <section className="main-container">
-            <FileDropZone
-                title="PPT 파일 업로드"
-                instructions="여기에 PPT 파일을 드래그하거나 클릭하여 업로드하세요"
-                accept=".pptx"
-                multiple={false}
-                onFilesChange={handleFileChange}
-                buttonLabel="파일 읽기"
-                onButtonClick={handleSubmit}
-                buttonDisabled={isUploading}
-            />
+            <section className="upload-section">
+                <h2>PPT 파일 업로드</h2>
+                <form id="ppt-upload-form" onSubmit={handleSubmit} encType="multipart/form-data">
+                    <FileDropZone
+                        instructions="여기에 PPT 파일을 드래그하거나 클릭하여 업로드하세요"
+                        accept=".pptx"
+                        multiple={false}
+                        onFilesChange={handleFileChange}
+                    />
+                    <div className="button-container">
+                        <button type="submit" className="action-button" disabled={isUploading || !selectedFile}>
+                            {isUploading ? '파일 읽는 중...' : '파일 읽기'}
+                        </button>
+                    </div>
+                </form>
+            </section>
 
             {/* 로딩 섹션 */}
             {isUploading && (
