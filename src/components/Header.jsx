@@ -45,7 +45,7 @@ const Header = () => {
                         isActive ? 'action-button new selected' : 'action-button new'
                     }
                 >
-                    폴더트리 내보내기
+                    폴더트리 정리
                 </NavLink>
                 <NavLink
                     to="/inquiry"
