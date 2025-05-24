@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {HashRouter as Router, Route, Routes} from 'react-router-dom';
 import Header from './components/Header';
 import TextAreaSection from './components/TextAreaSection';
@@ -9,15 +9,31 @@ import Inquiry from './components/Inquiry';
 import Footer from './components/Footer';
 import './App.css';
 
-
-// 미구현
-// import FolderListToExcel from './pages/FolderListToExcel';
-
 function App() {
+  const [showBanner, setShowBanner] = useState(false);
+  const [dontShowAgain, setDontShowAgain] = useState(false);
 
-  // -----------------------------
-  //  8. 제목에 시간 표시 (선택)
-  // -----------------------------
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    const dismissedUntil = localStorage.getItem('domain_notice_dismissed_until');
+
+    if (!hostname.includes('kittly')) {
+      const now = Date.now();
+      if (!dismissedUntil || now > parseInt(dismissedUntil, 10)) {
+        setShowBanner(true);
+      }
+    }
+  }, []);
+
+  const handleDismiss = () => {
+    if (dontShowAgain) {
+      const FIVE_DAYS_MS = 5 * 24 * 60 * 60 * 1000;
+      const expireAt = Date.now() + FIVE_DAYS_MS;
+      localStorage.setItem('domain_notice_dismissed_until', expireAt.toString());
+    }
+    setShowBanner(false);
+  };
+
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -43,6 +59,51 @@ function App() {
   return (
     <Router>
       <div className="App">
+        {showBanner && (
+          <div style={{
+            position: 'fixed',
+            top: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: '#fff8dc',
+            border: '1px solid #f0d680',
+            borderRadius: '12px',
+            padding: '18px 24px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+            zIndex: 10000,
+            textAlign: 'center',
+            maxWidth: '500px',
+            width: '90%',
+            fontFamily: 'sans-serif',
+            color: '#333'
+          }}>
+            <div style={{ marginBottom: '10px', fontWeight: 'bold' }}>
+              ⚠️ your-in.site는 2025년 9월 1일 종료됩니다.
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              앞으로는 <a href="https://kittly.xyz" target="_blank" rel="noreferrer">kittly.xyz</a>를 이용해주세요.
+            </div>
+            <label style={{ display: 'block', marginBottom: '12px' }}>
+              <input
+                type="checkbox"
+                checked={dontShowAgain}
+                onChange={() => setDontShowAgain(!dontShowAgain)}
+                style={{ marginRight: '8px' }}
+              />
+              5일간 다시 보지 않기
+            </label>
+            <button onClick={handleDismiss} style={{
+              padding: '8px 16px',
+              background: '#facc15',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontWeight: 'bold'
+            }}>
+              확인
+            </button>
+          </div>
+        )}
         <Header/>
         <div className="header-separator"></div>
         <main>
