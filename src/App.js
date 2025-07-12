@@ -79,7 +79,7 @@ function App() {
               ⚠️ your-in.site는 2025년 9월 1일 종료됩니다.
             </div>
             <div style={{ marginBottom: '16px' }}>
-              앞으로는 <a href="https://kittly.xyz" target="_blank" rel="noreferrer">kittly.xyz</a>를 이용해주세요.
+              앞으로는 <a href="https://kittly.shop" target="_blank" rel="noreferrer">kittly.shop</a>를 이용해주세요.
             </div>
             <label style={{ display: 'block', marginBottom: '12px' }}>
               <input
