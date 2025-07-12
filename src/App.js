@@ -14,16 +14,12 @@ function App() {
   const [dontShowAgain, setDontShowAgain] = useState(false);
 
   useEffect(() => {
-    const hostname = window.location.hostname;
+    const from = new URLSearchParams(window.location.search).get('from');
     const dismissedUntil = localStorage.getItem('domain_notice_dismissed_until');
-    console.log('[도메인 확인]', hostname);
-    console.log('[dismissedUntil]', dismissedUntil);
+    const now = Date.now();
 
-    if (!hostname.includes('kittly')) {
-      const now = Date.now();
-      if (!dismissedUntil || now > parseInt(dismissedUntil, 10)) {
-        setShowBanner(true);
-      }
+    if (from === 'yourin' && (!dismissedUntil || now > parseInt(dismissedUntil, 10))) {
+      setShowBanner(true);
     }
   }, []);
 
