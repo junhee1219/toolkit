@@ -16,6 +16,8 @@ function App() {
   useEffect(() => {
     const hostname = window.location.hostname;
     const dismissedUntil = localStorage.getItem('domain_notice_dismissed_until');
+    console.log('[도메인 확인]', hostname);
+    console.log('[dismissedUntil]', dismissedUntil);
 
     if (!hostname.includes('kittly')) {
       const now = Date.now();
