@@ -1,0 +1,170 @@
+.compress-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.compress-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+}
+.compress-header p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.compress-error {
+    background: #3a1a1a;
+    border: 1px solid #c0392b;
+    color: #e74c3c;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.compress-upload {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.compress-dropzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    min-height: 200px;
+    border: 2px dashed #444;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s;
+}
+.compress-dropzone:hover {
+    border-color: #6366f1;
+}
+.compress-preview-img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+.compress-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #888;
+}
+.compress-hint {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.compress-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.compress-quality {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+.compress-quality input[type="range"] {
+    width: 200px;
+    accent-color: #6366f1;
+}
+
+.compress-btn {
+    padding: 10px 24px;
+    background: #6366f1;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.compress-btn:hover {
+    background: #4f46e5;
+}
+.compress-btn:disabled {
+    background: #444;
+    cursor: not-allowed;
+}
+.compress-btn.download {
+    background: #059669;
+}
+.compress-btn.download:hover {
+    background: #047857;
+}
+
+.compress-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+.compress-stats {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #1a1a24;
+    padding: 16px 24px;
+    border-radius: 12px;
+    border: 1px solid #2a2a3a;
+}
+.compress-stat {
+    text-align: center;
+}
+.stat-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+.stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #e0e0e0;
+}
+.stat-value.reduction {
+    color: #10b981;
+}
+
+.compress-faq {
+    max-width: 600px;
+    margin: 32px auto 0;
+}
+.compress-faq h3 {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 12px;
+}
+.compress-faq details {
+    margin-bottom: 8px;
+    background: #1a1a24;
+    border: 1px solid #2a2a3a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.compress-faq summary {
+    padding: 12px 16px;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+.compress-faq details p {
+    padding: 0 16px 12px;
+    color: #888;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}

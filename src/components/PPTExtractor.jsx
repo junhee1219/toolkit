@@ -2,6 +2,7 @@
 
 import React, {useState} from 'react';
 import JSZip from 'jszip';
+import PageMeta from './PageMeta';
 import './PPTExtractor.css';
 import FileDropZone from './FileDropZone'; // 공통 컴포넌트
 
@@ -214,6 +215,7 @@ const PPTExtractor = () => {
 
   return (
     <section className="main-container">
+      <PageMeta title="무료 PPT 텍스트 추출기" description="파워포인트 파일에서 텍스트를 추출합니다. 무료, 서버 업로드 없이 브라우저에서 처리." />
 
       <FileDropZone
         title="PPT 파일 업로드"

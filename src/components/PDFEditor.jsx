@@ -5,6 +5,7 @@ import Sortable from 'sortablejs';
 import {v4 as uuidv4} from 'uuid';
 
 import FileDropZone from './FileDropZone'; // 공통 컴포넌트
+import PageMeta from './PageMeta';
 import './PDFEditor.css';
 
 // PDF.js 워커 설정
@@ -135,6 +136,7 @@ function PDFEditor() {
   };
 
   return (<section className="main-container">
+    <PageMeta title="무료 PDF 이어붙이기" description="여러 PDF 파일을 하나로 합칩니다. 무료, 서버 업로드 없이 브라우저에서 처리." />
     <FileDropZone
       title="PDF 파일 업로드"
       instructions="여기에 PDF 파일을 드래그하거나 클릭하여 업로드하세요"

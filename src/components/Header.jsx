@@ -39,6 +39,54 @@ const Header = () => {
         >
           PDF 이미지 변환
         </NavLink>
+        <NavLink
+          to="/image_compress"
+          className={({isActive}) =>
+            isActive ? 'action-button selected' : 'action-button'
+          }
+        >
+          이미지 압축
+        </NavLink>
+        <NavLink
+          to="/image_resize"
+          className={({isActive}) =>
+            isActive ? 'action-button selected' : 'action-button'
+          }
+        >
+          이미지 리사이즈
+        </NavLink>
+        <NavLink
+          to="/qr_generator"
+          className={({isActive}) =>
+            isActive ? 'action-button selected' : 'action-button'
+          }
+        >
+          QR코드
+        </NavLink>
+        <NavLink
+          to="/json_formatter"
+          className={({isActive}) =>
+            isActive ? 'action-button selected' : 'action-button'
+          }
+        >
+          JSON 포맷터
+        </NavLink>
+        <NavLink
+          to="/color_converter"
+          className={({isActive}) =>
+            isActive ? 'action-button selected' : 'action-button'
+          }
+        >
+          색상 변환
+        </NavLink>
+        <NavLink
+          to="/password_generator"
+          className={({isActive}) =>
+            isActive ? 'action-button selected' : 'action-button'
+          }
+        >
+          비밀번호
+        </NavLink>
         {/*<NavLink*/}
         {/*    to="/folder_list_to_excel"*/}
         {/*    className={({ isActive }) =>*/}

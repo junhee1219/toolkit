@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PageMeta from './PageMeta';
 import './TextAreaSection.css';
 
 const TextAreaSection = () => {
@@ -109,6 +110,7 @@ const TextAreaSection = () => {
 
   return (
     <section className="main-container">
+      <PageMeta title="무료 텍스트 변환 도구" description="대소문자 변환, 찾기/바꾸기, 줄바꿈 변환 등 무료 온라인 텍스트 도구" />
       {/* 상단 버튼 5개 */}
       <div className="top-button-bar">
         <button

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import * as pdfjsLib from 'pdfjs-dist';
 import JSZip from 'jszip';
 import FileDropZone from './FileDropZone'; // 공통 컴포넌트 (드래그 앤 드롭)
+import PageMeta from './PageMeta';
 import './PDFToJPG.css';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -101,6 +102,7 @@ function PDFToJPG() {
 
   return (
     <section className="main-container">
+      <PageMeta title="무료 PDF 이미지 변환" description="PDF 파일을 JPG 이미지로 변환합니다. 무료, 서버 업로드 없이 브라우저에서 처리." />
       <FileDropZone
         title="PDF를 JPG로 변환"
         instructions="여기에 PDF 파일을 드래그하거나 클릭하여 업로드하세요"
