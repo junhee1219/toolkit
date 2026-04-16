@@ -13,6 +13,14 @@ const Header = () => {
           }
           end
         >
+          홈
+        </NavLink>
+        <NavLink
+          to="/text_tool"
+          className={({isActive}) =>
+            isActive ? 'action-button selected' : 'action-button'
+          }
+        >
           텍스트 도구
         </NavLink>
         <NavLink
