@@ -77,7 +77,20 @@
 
 /* 추출 설정 섹션 스타일 */
 #extract-settings-section {
-    margin: 20px 0;
+    margin: 20px auto;
+    max-width: 700px;
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+#extract-settings-section h2 {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 #extract-settings-form {
@@ -88,6 +101,7 @@
     background-color: #2c2c2c;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
 }
 
 .setting-group {
@@ -132,8 +146,8 @@
 
 /* 추출 버튼 스타일 */
 #extract-button {
-    align-self: center;
-    margin-top: 20px;
+    display: block;
+    margin: 20px auto 0;
 }
 
 /* 다운로드 섹션 스타일 */

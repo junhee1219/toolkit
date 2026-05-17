@@ -32,13 +32,15 @@ function Inquiry() {
 
   return  (
     <form onSubmit={handleSubmit} style={{
-      width: '60rem',
+      width: '100%',
+      maxWidth: '60rem',
       margin: '0 auto',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      padding: '2rem',
-      color: '#fff'
+      padding: '2rem 1rem',
+      color: '#fff',
+      boxSizing: 'border-box'
     }}>
       <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>
         문의나 제안은 항상 환영합니다!!

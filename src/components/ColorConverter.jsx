@@ -86,7 +86,7 @@ function ColorConverter() {
 
             <div style={{ maxWidth: 400, margin: '0 auto' }}>
                 {/* HEX */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, justifyContent: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <span style={{ color: '#888', width: 40, textAlign: 'right', fontSize: '0.85rem' }}>HEX</span>
                     <input
                         type="color"
@@ -103,7 +103,7 @@ function ColorConverter() {
                 </div>
 
                 {/* RGB */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, justifyContent: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <span style={{ color: '#888', width: 40, textAlign: 'right', fontSize: '0.85rem' }}>RGB</span>
                     <input type="number" min="0" max="255" value={rgb.r} onChange={(e) => updateFromRgb('r', e.target.value)} style={inputStyle} />
                     <input type="number" min="0" max="255" value={rgb.g} onChange={(e) => updateFromRgb('g', e.target.value)} style={inputStyle} />
@@ -112,7 +112,7 @@ function ColorConverter() {
                 </div>
 
                 {/* HSL */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, justifyContent: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
                     <span style={{ color: '#888', width: 40, textAlign: 'right', fontSize: '0.85rem' }}>HSL</span>
                     <span style={{ color: '#aaa', fontSize: '0.9rem' }}>{hsl.h}°, {hsl.s}%, {hsl.l}%</span>
                     <button onClick={() => copyText(`hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`)} style={{ padding: '6px 10px', background: '#333', border: 'none', borderRadius: 6, color: '#aaa', cursor: 'pointer', fontSize: '0.8rem' }}>복사</button>

@@ -1,66 +1,118 @@
 /* Header.css */
 
-/* 기존 스타일 유지 */
-
-/* 헤더 전체 스타일 */
 header {
     background-color: #1f1f1f;
-    padding: 15px 30px;
+    padding: 12px 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 20px auto 0px; /* 상단 마진 20px, 좌우 마진 auto, 하단 마진 30px */
+    margin: 20px auto 0;
     border-radius: 8px;
+    width: 100%;
     max-width: 1500px;
-    box-sizing: border-box; /* 패딩과 보더를 포함한 전체 크기 계산 */
+    box-sizing: border-box;
 }
 
-/* 네비게이션 바 */
+.header-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.header-brand {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    flex-shrink: 0;
+    margin-right: 4px;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+}
+
+.hamburger span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    margin: 0 auto;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
 .nav-button-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    gap: 15px; /* 버튼 간격 조정 */
+    gap: 6px;
+    flex: 1;
+    flex-wrap: nowrap;
 }
 
-/* 네비게이션 링크 버튼 */
 .nav-button-container .action-button {
-    padding: 10px 20px;
+    padding: 7px 11px;
     background-color: #2c2c2c;
     border: none;
     border-radius: 6px;
     color: #ffffff;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.15s;
+    font-size: 0.85rem;
     position: relative;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center; /* 텍스트 수평 중앙 정렬 */
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    justify-content: center;
+    white-space: nowrap;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
 .nav-button-container .action-button:hover {
     background-color: #3a3a3a;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .nav-button-container .action-button:active {
     transform: translateY(0);
 }
 
-/* 신규 기능 버튼 스타일 */
 .nav-button-container .action-button.new::after {
     content: 'NEW';
     background-color: #ff3b30;
     color: #ffffff;
-    font-size: 0.7em;
-    padding: 2px 6px;
-    border-radius: 12px;
-    margin-left: 8px;
+    font-size: 0.65em;
+    padding: 2px 5px;
+    border-radius: 10px;
+    margin-left: 6px;
     font-weight: bold;
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    white-space: nowrap;
 }
 
-/* 문의/제안하기 버튼 추가 스타일 */
 .nav-button-container .action-button.inquiry-button {
     background-color: #34c759;
 }
@@ -69,28 +121,44 @@ header {
     background-color: #28a745;
 }
 
-/* 선택된 링크 스타일 */
 .nav-button-container .action-button.selected {
     background-color: #007aff;
-    transform: translateY(-2px);
 }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
+/* 태블릿 이하: 햄버거 메뉴로 전환 */
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex;
+    }
+
     .nav-button-container {
-        flex-wrap: wrap;
-        gap: 10px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        flex: 0 0 100%;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .nav-button-container.open {
+        display: flex;
     }
 
     .nav-button-container .action-button {
-        flex: 1 1 45%;
-        text-align: center;
+        width: 100%;
+        padding: 12px 14px;
+        font-size: 0.95rem;
+        justify-content: flex-start;
     }
 }
 
-@media (max-width: 480px) {
-    .nav-button-container .action-button {
-        flex: 1 1 100%;
-        text-align: center;
+@media (max-width: 600px) {
+    header {
+        padding: 10px 14px;
+        margin-top: 12px;
+    }
+    .header-brand {
+        font-size: 1.2rem;
     }
 }

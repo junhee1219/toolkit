@@ -1,117 +1,74 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {NavLink, useLocation} from 'react-router-dom';
 import './Header.css';
 
+const NAV_ITEMS = [
+  {to: '/', label: '홈', end: true},
+  {to: '/text_tool', label: '텍스트 도구'},
+  {to: '/ppt_extractor', label: 'PPT 추출'},
+  {to: '/pdf_editor', label: 'PDF 이어붙이기'},
+  {to: '/pdf_to_jpg', label: 'PDF 이미지 변환'},
+  {to: '/image_compress', label: '이미지 압축'},
+  {to: '/image_resize', label: '이미지 리사이즈'},
+  {to: '/qr_generator', label: 'QR코드'},
+  {to: '/json_formatter', label: 'JSON 포맷터'},
+  {to: '/color_converter', label: '색상 변환'},
+  {to: '/password_generator', label: '비밀번호'},
+];
+
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  const close = () => setMenuOpen(false);
+
   return (
     <header>
-      <nav className="nav-button-container">
-        <NavLink
-          to="/"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-          end
-        >
-          홈
+      <div className="header-bar">
+        <NavLink to="/" className="header-brand" end onClick={close}>
+          kittly
         </NavLink>
-        <NavLink
-          to="/text_tool"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
+        <button
+          className={`hamburger ${menuOpen ? 'open' : ''}`}
+          aria-label="메뉴 열기"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
         >
-          텍스트 도구
-        </NavLink>
-        <NavLink
-          to="/ppt_extractor"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          PPT 추출
-        </NavLink>
-        <NavLink
-          to="/pdf_editor"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          PDF 이어붙이기
-        </NavLink>
-        <NavLink
-          to="/pdf_to_jpg"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          PDF 이미지 변환
-        </NavLink>
-        <NavLink
-          to="/image_compress"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          이미지 압축
-        </NavLink>
-        <NavLink
-          to="/image_resize"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          이미지 리사이즈
-        </NavLink>
-        <NavLink
-          to="/qr_generator"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          QR코드
-        </NavLink>
-        <NavLink
-          to="/json_formatter"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          JSON 포맷터
-        </NavLink>
-        <NavLink
-          to="/color_converter"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          색상 변환
-        </NavLink>
-        <NavLink
-          to="/password_generator"
-          className={({isActive}) =>
-            isActive ? 'action-button selected' : 'action-button'
-          }
-        >
-          비밀번호
-        </NavLink>
-        {/*<NavLink*/}
-        {/*    to="/folder_list_to_excel"*/}
-        {/*    className={({ isActive }) =>*/}
-        {/*        isActive ? 'action-button new selected' : 'action-button new'*/}
-        {/*    }*/}
-        {/*>*/}
-        {/*    폴더트리 정리*/}
-        {/*</NavLink>*/}
-        <NavLink
-          to="/inquiry"
-          className={({isActive}) =>
-            isActive ? 'action-button inquiry-button selected' : 'action-button inquiry-button'
-          }
-        >
-          문의/제안하기
-        </NavLink>
-      </nav>
+          <span/>
+          <span/>
+          <span/>
+        </button>
+        <nav className={`nav-button-container ${menuOpen ? 'open' : ''}`}>
+          {NAV_ITEMS.map(({to, label, end}) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({isActive}) =>
+                isActive ? 'action-button selected' : 'action-button'
+              }
+              onClick={close}
+            >
+              {label}
+            </NavLink>
+          ))}
+          <NavLink
+            to="/inquiry"
+            className={({isActive}) =>
+              isActive
+                ? 'action-button inquiry-button selected'
+                : 'action-button inquiry-button'
+            }
+            onClick={close}
+          >
+            문의/제안하기
+          </NavLink>
+        </nav>
+      </div>
     </header>
   );
 };

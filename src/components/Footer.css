@@ -3,12 +3,13 @@
 /* Footer 전체 스타일 */
 .footer {
     background-color: #1f1f1f;
-    padding: 20px 20px;
-    box-shadow: 0 4px rgba(0, 0, 0, 0.1);
-    margin: 10px auto 30px; /* 상단 마진 40px, 좌우 마진 auto, 하단 마진 0 */
-    border-radius: 8px 8px 8px 8px; /* 상단 모서리 둥글게 */
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px auto 30px;
+    border-radius: 8px;
+    width: 100%;
     max-width: 1500px;
-    box-sizing: border-box; /* 패딩과 보더를 포함한 전체 크기 계산 */
+    box-sizing: border-box;
     color: #ffffff;
 }
 

@@ -1,29 +1,24 @@
 /* TextAreaSection.css */
 
-/* 상단 버튼 바 */
 .top-button-bar {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
     flex-wrap: wrap;
-    gap: 15px; /* 버튼 간격 조정 */
+    gap: 10px;
+    padding: 0 4px;
 }
 
-/* 메인 섹션의 버튼 스타일링 */
 .main-action-button {
-    padding: 10px 20px;
+    padding: 10px 18px;
     background-color: #2c2c2c;
     border: none;
     border-radius: 6px;
     color: #ffffff;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    font-size: 1rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 텍스트 수평 중앙 정렬 */
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    transition: background-color 0.2s, transform 0.15s;
+    font-size: 0.95rem;
+    white-space: nowrap;
 }
 
 .main-action-button:hover {
@@ -36,67 +31,64 @@
     color: #ffffff;
 }
 
-.copy-button {
-    /* 복사 버튼에 대한 추가 스타일링이 필요하다면 여기에 작성 */
-}
-
 /* 메인 콘텐츠 섹션 */
 .content-section {
     display: flex;
-    flex: 1;
-    gap: 25px;
-    overflow: hidden;
-    flex-direction: row; /* 가로 방향으로 설정 */
-    width: 100%; /* 전체 너비 차지 */
+    gap: 16px;
+    flex-direction: row;
+    width: 100%;
+    min-height: 480px;
+    align-items: stretch;
 }
 
 .replace-section {
-    flex: 2;
+    flex: 1 1 280px;
+    min-width: 240px;
+    max-width: 360px;
     display: flex;
     flex-direction: column;
     background-color: #1f1f1f;
-    padding: 20px;
+    padding: 16px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-width: 500px; /* 필요에 따라 조정 */
-    width: 100%;
+    box-sizing: border-box;
 }
 
-/* 첫 번째 텍스트 영역 */
 .textarea1-section,
 .textarea2-section {
-    flex: 4;
+    flex: 1 1 0;
     display: flex;
     flex-direction: column;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* 불필요한 스크롤 방지 */
-    width: 100%;
+    min-width: 0;
 }
 
 .replace-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    gap: 8px;
 }
 
 .replace-header label {
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1rem;
     color: #ffffff;
 }
 
 .add-pair-button {
-    padding: 5px 10px;
+    padding: 6px 12px;
     background-color: #4caf50;
     color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    font-size: 0.85rem;
 }
 
 .add-pair-button:hover {
@@ -112,23 +104,23 @@
 .replace-pair {
     display: flex;
     align-items: center;
-    gap: 10px; /* 인풋과 버튼 사이 간격 조정 */
-    flex-wrap: nowrap; /* 요소들이 한 줄에 있도록 설정 */
+    gap: 8px;
+    flex-wrap: nowrap;
 }
 
-/* 인풋 필드 스타일 */
 .find-word-input,
 .replace-word-input {
-    flex: 1 1 auto;
+    flex: 1 1 0;
     padding: 8px;
     background-color: #2c2c2c;
     color: #ffffff;
     border: 1px solid #555555;
     border-radius: 4px;
-    min-width: 0; /* 플렉스 아이템의 최소 너비를 0으로 설정하여 축소 가능하게 함 */
+    min-width: 0;
+    font-size: 0.9rem;
+    box-sizing: border-box;
 }
 
-/* 제거 버튼 스타일 */
 .remove-pair-button {
     padding: 8px 12px;
     background-color: #f44336;
@@ -136,43 +128,59 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    flex: 0 0 auto; /* 버튼의 크기를 고정 */
+    transition: background-color 0.2s;
+    flex: 0 0 auto;
+    line-height: 1;
 }
 
 .remove-pair-button:hover {
     background-color: #d32f2f;
 }
 
-.input-textarea {
+.input-textarea,
+.output-textarea {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     background-color: #2c2c2c;
     color: #ffffff;
     border: 1px solid #555555;
     border-radius: 4px;
     resize: none;
-    height: 100%;
-    font-size: 1em;
+    min-height: 420px;
+    font-size: 0.95rem;
     box-sizing: border-box;
+    width: 100%;
+    font-family: inherit;
 }
 
 .counter {
-    margin-top: 5px;
+    margin-top: 6px;
     text-align: right;
-    font-size: 0.9em;
+    font-size: 0.85rem;
     color: #bbbbbb;
 }
 
-.output-textarea {
-    flex: 1;
-    padding: 10px;
-    background-color: #2c2c2c;
-    color: #ffffff;
-    border: 1px solid #555555;
-    border-radius: 4px;
-    resize: none;
-    height: 100%;
-    font-size: 1em;
-    box-sizing: border-box;
+@media (max-width: 900px) {
+    .content-section {
+        flex-direction: column;
+        min-height: 0;
+    }
+    .replace-section {
+        max-width: 100%;
+        flex: 0 0 auto;
+    }
+    .input-textarea,
+    .output-textarea {
+        min-height: 220px;
+    }
+}
+
+@media (max-width: 600px) {
+    .top-button-bar {
+        gap: 6px;
+    }
+    .main-action-button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
 }
