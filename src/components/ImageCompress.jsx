@@ -173,8 +173,8 @@ function ImageCompress() {
                             <span className="stat-value">{formatSize(compressedSize)}</span>
                         </div>
                         <div className="compress-stat">
-                            <span className="stat-label">감소</span>
-                            <span className="stat-value reduction">{reduction > 0 ? `-${reduction}%` : `+${Math.abs(reduction)}%`}</span>
+                            <span className="stat-label">{reduction >= 0 ? '감소' : '증가'}</span>
+                            <span className="stat-value reduction">{`${Math.abs(reduction)}%`}</span>
                         </div>
                     </div>
 
