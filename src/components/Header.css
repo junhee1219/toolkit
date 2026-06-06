@@ -147,6 +147,7 @@ header {
 
     .nav-button-container .action-button {
         width: 100%;
+        box-sizing: border-box;
         padding: 12px 14px;
         font-size: 0.95rem;
         justify-content: flex-start;
