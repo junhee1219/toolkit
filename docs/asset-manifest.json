@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/toolkit/static/css/main.69e5ca84.css",
-    "main.js": "/toolkit/static/js/main.a62677dd.js",
+    "main.css": "/toolkit/static/css/main.1a2ccf97.css",
+    "main.js": "/toolkit/static/js/main.63042aec.js",
     "index.html": "/toolkit/index.html",
-    "main.69e5ca84.css.map": "/toolkit/static/css/main.69e5ca84.css.map",
-    "main.a62677dd.js.map": "/toolkit/static/js/main.a62677dd.js.map"
+    "main.1a2ccf97.css.map": "/toolkit/static/css/main.1a2ccf97.css.map",
+    "main.63042aec.js.map": "/toolkit/static/js/main.63042aec.js.map"
   },
   "entrypoints": [
-    "static/css/main.69e5ca84.css",
-    "static/js/main.a62677dd.js"
+    "static/css/main.1a2ccf97.css",
+    "static/js/main.63042aec.js"
   ]
 }
