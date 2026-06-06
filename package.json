@@ -2,6 +2,7 @@
   "name": "your-insight-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://junhee1219.github.io/toolkit",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "buffer": "^6.0.3",
