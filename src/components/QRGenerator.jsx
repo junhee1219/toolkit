@@ -58,6 +58,7 @@ function QRGenerator() {
                     placeholder="URL 또는 텍스트를 입력하세요 (예: https://example.com)"
                     style={{
                         width: '100%',
+                        boxSizing: 'border-box',
                         minHeight: 100,
                         padding: 14,
                         background: '#1a1a24',

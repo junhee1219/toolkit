@@ -57,13 +57,14 @@ function JsonFormatter() {
             {error && <div className="compress-error">{error}</div>}
 
             <div style={{ display: 'flex', gap: 16, maxWidth: 900, margin: '0 auto', flexWrap: 'wrap' }}>
-                <div style={{ flex: 1, minWidth: 300 }}>
+                <div style={{ flex: 1, minWidth: 'min(300px, 100%)' }}>
                     <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder='{"name": "value", ...}'
                         style={{
                             width: '100%',
+                            boxSizing: 'border-box',
                             minHeight: 300,
                             padding: 14,
                             background: '#1a1a24',
@@ -76,13 +77,14 @@ function JsonFormatter() {
                         }}
                     />
                 </div>
-                <div style={{ flex: 1, minWidth: 300 }}>
+                <div style={{ flex: 1, minWidth: 'min(300px, 100%)' }}>
                     <textarea
                         value={output}
                         readOnly
                         placeholder="결과가 여기에 표시됩니다"
                         style={{
                             width: '100%',
+                            boxSizing: 'border-box',
                             minHeight: 300,
                             padding: 14,
                             background: '#1a1a24',
